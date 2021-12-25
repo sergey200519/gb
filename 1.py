@@ -1,23 +1,26 @@
-# 1 задание
-def time(time):
-    sec = time % 60
-    min = int(time / 60)
-    hour = int(min / 60)
-    day = int(hour / 24)
-    if time < 60:
-        return f"{sec} сек"
-    if min > 60:
-        min = min % 60
-    else:
-        return f"{min} мин {sec} сек"
-    if hour > 24:
-        hour = hour % 24
-    else:
-        return f"{hour} час {min} мин {sec} сек"
-    return f"{day} дн {hour} час {min} мин {sec} сек"
+from timeit import timeit
 
 
-print(time(53))
-print(time(153))
-print(time(4153))
-print(time(400153))
+def func_1(nums):
+    new_arr = []
+    for i in range(len(nums)):
+        if nums[i] % 2 == 0:
+            new_arr.append(i)
+    return new_arr
+
+print(func_1([6, 2, 3, 8, 9, 7, 10]))
+n = int(1e7)
+print(timeit("func_1([6, 2, 3, 8, 9, 7, 10])", setup="from __main__ import func_1", number=n))
+
+
+
+
+
+def myfunc(num):
+    return [i for i, item in enumerate(num) if item % 2 == 0]
+
+print(myfunc([6, 2, 3, 8, 9, 7, 10]))
+
+print(timeit("myfunc([6, 2, 3, 8, 9, 7, 10])", setup="from __main__ import myfunc", number=n))
+
+# я сделал генератор и время работы сократилось

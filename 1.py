@@ -1,23 +1,31 @@
-# 1 задание
-def time(time):
-    sec = time % 60
-    min = int(time / 60)
-    hour = int(min / 60)
-    day = int(hour / 24)
-    if time < 60:
-        return f"{sec} сек"
-    if min > 60:
-        min = min % 60
-    else:
-        return f"{min} мин {sec} сек"
-    if hour > 24:
-        hour = hour % 24
-    else:
-        return f"{hour} час {min} мин {sec} сек"
-    return f"{day} дн {hour} час {min} мин {sec} сек"
+from collections import namedtuple
 
+def test():
+    n = int(input("Введите количество предприятия: "))
+    main = "company"
+    comanies = namedtuple(main, "name p1 p2 p3 p4")
+    data = {}
+    average = 0
+    i = 0
+    while i < n:
+        p_1 = int(input("Введите прибыль за первый квартал: "))
+        p_2 = int(input("Введите прибыль за второй квартал: "))
+        p_3 = int(input("Введите прибыль за третий квартал: "))
+        p_4 = int(input("Введите прибыль за четвёртый квартал: "))
+        company = comanies(name=input("Введите название предприятия: "), p1=p_1, p2=p_2, p3=p_3, p4=p_4)
+        data[company.name] = (company.p1 + company.p2 + company.p3 + company.p4) / 4
+        average += (company.p1 + company.p2 + company.p3 + company.p4) / 4
+        i += 1
 
-print(time(53))
-print(time(153))
-print(time(4153))
-print(time(400153))
+    average = average
+    best = []
+    worst = []
+    for key, value in data.items():
+        if value > average:
+            best.append(key)
+        else:
+            worst.append(key)
+
+    return f"{best} - выше среднего \n{worst} - ниже среднего \n{average} - средние значение"
+
+print(test())

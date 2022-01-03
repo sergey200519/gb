@@ -1,23 +1,25 @@
-# 1 задание
-def time(time):
-    sec = time % 60
-    min = int(time / 60)
-    hour = int(min / 60)
-    day = int(hour / 24)
-    if time < 60:
-        return f"{sec} сек"
-    if min > 60:
-        min = min % 60
+def calc():
+    main = input("Введите знак: ")
+    if main == "0":
+        return ""
+    try:
+        n_one = float(input("Введите первое число: "))
+        n_two = float(input("Введите второе число: "))
+    except:
+        print("error")
+        exit()
+    if main == "+":
+        print(n_one + n_two)
+    elif main == "-":
+        print(n_one - n_two)
+    elif main == "*":
+        print(n_one * n_two)
+    elif main == "/":
+        if n_two != 0:
+            print(n_one / n_two)
+        else:
+            print("На нуль делить нельзя")
     else:
-        return f"{min} мин {sec} сек"
-    if hour > 24:
-        hour = hour % 24
-    else:
-        return f"{hour} час {min} мин {sec} сек"
-    return f"{day} дн {hour} час {min} мин {sec} сек"
-
-
-print(time(53))
-print(time(153))
-print(time(4153))
-print(time(400153))
+        print("command  not found")
+    return calc()
+calc()

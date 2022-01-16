@@ -1,23 +1,36 @@
-# 1 задание
-def time(time):
-    sec = time % 60
-    min = int(time / 60)
-    hour = int(min / 60)
-    day = int(hour / 24)
-    if time < 60:
-        return f"{sec} сек"
-    if min > 60:
-        min = min % 60
-    else:
-        return f"{min} мин {sec} сек"
-    if hour > 24:
-        hour = hour % 24
-    else:
-        return f"{hour} час {min} мин {sec} сек"
-    return f"{day} дн {hour} час {min} мин {sec} сек"
+from random import randint
+from timeit import timeit
 
 
-print(time(53))
-print(time(153))
-print(time(4153))
-print(time(400153))
+def bubble_sort(lst_obj):
+    n = 1
+    flag = True
+    while n < len(lst_obj):
+        for i in range(len(lst_obj)-n):
+            if lst_obj[i] < lst_obj[i+1]:
+                lst_obj[i+1], lst_obj[i] = lst_obj[i], lst_obj[i+1]
+                flag = False
+        if flag:
+            return lst_obj
+        n += 1
+    return lst_obj
+
+
+orig_list = [randint(1, 10) for _ in range(10)]
+print(bubble_sort(orig_list[:]))
+print(
+    timeit(
+        "bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+orig_list = [10, 9, 8, 7, 6, 5, 4, 3, 2, 1]
+
+print(
+    timeit(
+        "bubble_sort(orig_list[:])",
+        globals=globals(),
+        number=1000))
+
+
+# Условия о совершение замены помогло но это лишь единичные случаи в большинстве случаях это не помогает
